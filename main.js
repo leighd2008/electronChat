@@ -1,7 +1,6 @@
 // Main Process
 const { log } = require('console');
-const { app, BrowserWindow, Notification } = require('electron');
-const path = require('path');
+const { app, BrowserWindow } = require('electron');
 
 // Renderer Process
 function createWindow() {
@@ -19,15 +18,7 @@ function createWindow() {
   win.webContents.openDevTools();
 }
 
-app.whenReady()
-  .then(() => {
-    createWindow();
-    const notification = new Notification({title: 'Hello World', body: 'My test message'})
-    notification.show();
-    const parsed = path.parse('/home/user/dir/file.txt');
-    console.log(parsed.base);
-    console.log(parsed.ext);
-  });
+app.whenReady().then(createWindow);
   
 
 app.on('window-all-closed', () => {
