@@ -9,8 +9,6 @@ function createWindow() {
     height: 800,
     backgroundColor: "lavender",
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
     }
   })
   
