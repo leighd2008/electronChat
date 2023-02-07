@@ -1,11 +1,12 @@
 // Main Process
-const { log } = require('console');
 const { app, BrowserWindow } = require('electron');
+const path = require('path');
+const isDev = !app.isPackaged;
 
 // Renderer Process
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1200,
+    width: 800,
     height: 800,
     backgroundColor: "lavender",
     webPreferences: {
@@ -13,7 +14,13 @@ function createWindow() {
   })
   
   win.loadFile('index.html')
-  win.webContents.openDevTools();
+  isDev && win.webContents.openDevTools();
+}
+
+if (isDev) {
+  require('electron-reload')(__dirname, {
+    electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
+  })
 }
 
 app.whenReady().then(createWindow);

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const App = () => {
-  const title = "Hello World My Perfect Application";
+  const title = "Hello World";
   const enhancedTitle = title + ' - React App!';
   
   return (
