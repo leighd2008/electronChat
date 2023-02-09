@@ -1,5 +1,5 @@
 // Main Process
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain, Notification } = require('electron');
 const path = require('path');
 const isDev = !app.isPackaged;
 
@@ -10,6 +10,8 @@ function createWindow() {
     height: 800,
     backgroundColor: "lavender",
     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
     }
   })
   
@@ -25,6 +27,9 @@ if (isDev) {
 
 app.whenReady().then(createWindow);
   
+ipcMain.on('notify', (e, message) => {
+  new Notification({title: 'Notification', body: message}).show();
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
