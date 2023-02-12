@@ -1,5 +1,11 @@
 import React from 'react';
 import HomeView from '../views/Home';
+import ChatView from '../views/Chat';
+import LoginView from '../views/Login';
+import SettingsView from '../views/Settings';
+import RegisterView from '../views/Register';
+
+
 import Navbar from '../components/Navbar'
 
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
@@ -11,10 +17,11 @@ const App = () => {
         <Navbar />
         <div className='content-wrapper'>
           <Routes>
-            <Route path='/settings' element={<h1>I am settings view</h1>} />
-            <Route path='/login' element={<h1>I am login view</h1>} />
-            <Route path='/register' element={<h1>I am register view</h1>} />
-            <Route path='/' element={<HomeView />} />
+            <Route path='/' exact element={<HomeView />} />
+            <Route path='/chat' element={<ChatView />} />
+            <Route path='/settings' element={<SettingsView />} />
+            <Route path='/login' element={<LoginView />} />
+            <Route path='/register' element={<RegisterView />} />
           </Routes>
         </div>
       </Router>
