@@ -18,7 +18,7 @@ const App = () => {
         <div className='content-wrapper'>
           <Routes>
             <Route path='/' exact element={<HomeView />} />
-            <Route path='/chat' element={<ChatView />} />
+            <Route path='/chat/:id' element={<ChatView />} />
             <Route path='/settings' element={<SettingsView />} />
             <Route path='/login' element={<LoginView />} />
             <Route path='/register' element={<RegisterView />} />
