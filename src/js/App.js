@@ -6,7 +6,7 @@ import SettingsView from '../views/Settings';
 import RegisterView from '../views/Register';
 
 
-import Navbar from '../components/Navbar'
+import Navbar from '../js/components/Navbar'
 
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 

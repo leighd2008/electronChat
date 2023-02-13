@@ -2,9 +2,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import ChatUserList from "../components/ChatUsersList";
-import ViewTitle from "../components/shared/ViewTitle";
-import ChatMessagesList from "../components/ChatMessagesList";
+import ChatUserList from "../js/components/ChatUsersList";
+import ViewTitle from "../js/components/shared/ViewTitle";
+import ChatMessagesList from "../js/components/ChatMessagesList";
 
 export default function Chat () {
   const { id } = useParams();
