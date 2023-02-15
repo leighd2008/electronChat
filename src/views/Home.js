@@ -11,8 +11,7 @@ import { fetchChats } from "../js/api/chats";
 export default function Home() {
   
   useEffect(() => {
-    fetchChats().then(chats => {
-    });
+    fetchChats()
   }, []) 
  
   return (
