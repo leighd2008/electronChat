@@ -3,6 +3,7 @@
     "electronchat",
     "esmodules",
     "firestore",
+    "middlewares",
     "reduxjs"
   ]
 }

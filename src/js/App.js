@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Provider } from 'react-redux';
 
-import HomeView from '../views/Home';
-import ChatView from '../views/Chat';
-import LoginView from '../views/Login';
-import SettingsView from '../views/Settings';
-import RegisterView from '../views/Register';
+import HomeView from '../js/views/Home';
+import ChatView from '../js/views/Chat';
+import LoginView from '../js/views/Login';
+import SettingsView from '../js/views/Settings';
+import RegisterView from '../js/views/Register';
 
 
 import Navbar from '../js/components/Navbar'

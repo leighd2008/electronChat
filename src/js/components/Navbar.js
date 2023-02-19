@@ -1,14 +1,10 @@
 
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const message = useSelector(state => {
-    return state.message;
-  })
-  
+    
   return (
     <div className="chat-navbar">
       <nav className="chat-navbar-inner">
@@ -20,7 +16,6 @@ export default function Navbar() {
             to='/settings' 
             className="btn btn-outline-success ml-2">Settings</Link>
         </div>
-        {message}
         <div className="chat-navbar-inner-right">
           <span className="logged-in-user">Hi User</span>
           <Link
