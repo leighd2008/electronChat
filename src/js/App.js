@@ -4,9 +4,8 @@ import { Provider } from 'react-redux';
 
 import HomeView from '../js/views/Home';
 import ChatView from '../js/views/Chat';
-import LoginView from '../js/views/Login';
+import WelcomeView from './views/Welcome';
 import SettingsView from '../js/views/Settings';
-import RegisterView from '../js/views/Register';
 
 
 import Navbar from '../js/components/Navbar'
@@ -24,11 +23,10 @@ const App = () => {
           <Navbar />
           <div className='content-wrapper'>
             <Routes>
-              <Route path='/' exact element={<HomeView />} />
+              <Route path='/' exact element={<WelcomeView />} />
+              <Route path='/home' element={<HomeView />} />
               <Route path='/chat/:id' element={<ChatView />} />
               <Route path='/settings' element={<SettingsView />} />
-              <Route path='/login' element={<LoginView />} />
-              <Route path='/register' element={<RegisterView />} />
             </Routes>
           </div>
         </Router>

@@ -10,7 +10,7 @@ export default function Navbar() {
       <nav className="chat-navbar-inner">
         <div className="chat-navbar-inner-left">
           <Link
-            to='/'
+            to='/home'
             className="btn btn-outline-primary">Home</Link>
           <Link 
             to='/settings' 
@@ -19,10 +19,7 @@ export default function Navbar() {
         <div className="chat-navbar-inner-right">
           <span className="logged-in-user">Hi User</span>
           <Link
-            to='/register'
-            className="btn btn-outline-danger ml-2">Register</Link>
-          <Link
-            to='/login'
+            to='/'
             className="btn btn-outline-success ml-2">Login</Link>
           <button
             onClick={() => navigate(-1)}
