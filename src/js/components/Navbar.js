@@ -21,9 +21,9 @@ export default function Navbar() {
             className="btn btn-outline-success ml-2">Settings</Link>
         </div>
         <div className="chat-navbar-inner-right">
-          {/* <Link
+          <Link
             to='/'
-            className="btn btn-outline-success ml-2">Login</Link> */}
+            className="btn btn-outline-success ml-2">Login</Link>
           { user &&
             <>
               <img className="avatar mr-2" src={user.avatar} alt="avatar" />
