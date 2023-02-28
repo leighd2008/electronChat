@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 
-import { Provider } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import StoreProvider from './store/StoreProvider';
 
 import HomeView from '../js/views/Home';
 import ChatView from '../js/views/Chat';
@@ -9,34 +11,47 @@ import SettingsView from '../js/views/Settings';
 
 
 import Navbar from '../js/components/Navbar'
-import configureStore from '../js/store/index';
-import { listenToAuthChanges } from './actions/auth';
+import LoadingView from './components/shared/loadingView';
 
-const store = configureStore();
+import { listenToAuthChanges } from './actions/auth';
 
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
-const App = () => {
+const ContentWrapper = ({children}) => <div className='content-wrapper'>{children}</div>
+
+function ChatApp() {
+  const dispatch = useDispatch();
+  const isChecking = useSelector(({auth}) => auth.isChecking)
   
   useEffect(() => {
-    store.dispatch(listenToAuthChanges());
-  }, [])
+    dispatch(listenToAuthChanges());
+  }, [dispatch])
   
-    return (
-      <Provider store={store} >
-        <Router>
-          <Navbar />
-          <div className='content-wrapper'>
-            <Routes>
-              <Route path='/' exact element={<WelcomeView />} />
-              <Route path='/home' element={<HomeView />} />
-              <Route path='/chat/:id' element={<ChatView />} />
-              <Route path='/settings' element={<SettingsView />} />
-            </Routes>
-          </div>
-        </Router>
-      </Provider>
-    )
+  if (isChecking) {
+    return <LoadingView />
   }
+  
+  return (
+    <Router>
+      <Navbar />
+      <ContentWrapper>
+        <Routes>
+          <Route path='/' exact element={<WelcomeView />} />
+          <Route path='/home' element={<HomeView />} />
+          <Route path='/chat/:id' element={<ChatView />} />
+          <Route path='/settings' element={<SettingsView />} />
+        </Routes>
+      </ContentWrapper>
+    </Router>
+    
+  )
+}
 
-export default App;
+export default function App() {
+  return (
+    <StoreProvider >
+      <ChatApp />
+    </StoreProvider>
+    
+  )
+}
