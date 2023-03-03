@@ -13,6 +13,7 @@ import SettingsView from '../js/views/Settings';
 import LoadingView from './components/shared/loadingView';
 
 import { listenToAuthChanges } from './actions/auth';
+import { listenToConnectionChanges } from './actions/app';
 
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -31,20 +32,13 @@ function ChatApp() {
   const dispatch = useDispatch();
   const isChecking = useSelector(({auth}) => auth.isChecking)
   
-  const alertOnlineStatus = () => {
-    window.alert(window.navigator.onLine ? 'online' : 'offline');
-  };
-  
   useEffect(() => {
     const unsubFromAuth = dispatch(listenToAuthChanges());
-    
-    window.addEventListener('online', alertOnlineStatus);
-    window.addEventListener('offline', alertOnlineStatus);
+    const unsubFromConnection = dispatch(listenToConnectionChanges())
     
     return () => {
       unsubFromAuth();
-      window.removeEventListener('online', alertOnlineStatus);
-      window.removeEventListener('offline', alertOnlineStatus);
+      unsubFromConnection();
     }
     
   }, [dispatch])

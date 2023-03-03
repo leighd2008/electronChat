@@ -5,6 +5,7 @@
     "esmodules",
     "firestore",
     "middlewares",
-    "reduxjs"
+    "reduxjs",
+    "unsub"
   ]
 }
