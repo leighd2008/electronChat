@@ -11,3 +11,12 @@ export default function BaseLayout({children, ...props}) {
     </>
   )
 }
+
+export const withBaseLayout = (Component, config) =>  (props) => {
+  return (
+    <>
+      <Navbar {...config} />
+      <Component {...props} />
+    </>
+  )
+}
