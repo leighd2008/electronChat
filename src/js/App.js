@@ -31,8 +31,22 @@ function ChatApp() {
   const dispatch = useDispatch();
   const isChecking = useSelector(({auth}) => auth.isChecking)
   
+  const alertOnlineStatus = () => {
+    window.alert(window.navigator.onLine ? 'online' : 'offline');
+  };
+  
   useEffect(() => {
-    dispatch(listenToAuthChanges());
+    const unsubFromAuth = dispatch(listenToAuthChanges());
+    
+    window.addEventListener('online', alertOnlineStatus);
+    window.addEventListener('offline', alertOnlineStatus);
+    
+    return () => {
+      unsubFromAuth();
+      window.removeEventListener('online', alertOnlineStatus);
+      window.removeEventListener('offline', alertOnlineStatus);
+    }
+    
   }, [dispatch])
   
   if (isChecking) {
