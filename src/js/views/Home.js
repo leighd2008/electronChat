@@ -32,4 +32,4 @@ function Home() {
   )
 }
 
-export default withBaseLayout(Home)
+export default withBaseLayout(Home, {canGoBack: true})
