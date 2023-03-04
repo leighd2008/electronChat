@@ -30,7 +30,8 @@ const ContentWrapper = ({children}) => <div className='content-wrapper'>{childre
 
 function ChatApp() {
   const dispatch = useDispatch();
-  const isChecking = useSelector(({auth}) => auth.isChecking)
+  const isChecking = useSelector(({auth}) => auth.isChecking);
+  const isOnline = useSelector(({app}) => app.isOnline);
   
   useEffect(() => {
     const unsubFromAuth = dispatch(listenToAuthChanges());
@@ -45,6 +46,10 @@ function ChatApp() {
   
   if (isChecking) {
     return <LoadingView />
+  }
+  
+  if (!isOnline) {
+    return <LoadingView message='Application has been disconnected from the internet. Please reconnect ...' />
   }
   
   return (
