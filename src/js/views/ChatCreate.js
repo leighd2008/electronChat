@@ -1,12 +1,20 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
 import { withBaseLayout } from '../layouts/Base';
+import { createChat } from '../actions/chats';
 
 function ChatCreate() {
   const { register, handleSubmit } = useForm();
+  const user = useSelector(({auth}) => auth.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   const onSubmit = data => {
-    alert(JSON.stringify(data));
+    dispatch(createChat(data, user.uid))
+      .then(_ => navigate('/home'))
   }
   
   return(

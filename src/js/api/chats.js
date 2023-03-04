@@ -9,3 +9,9 @@ export const fetchChats = () =>
     .get()
     .then(extractSnapshotData)
     
+export const createChat = chat =>
+  db
+    .collection('chats')
+    .add(chat)
+    .then(docRef => docRef.id)
+    
