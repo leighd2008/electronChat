@@ -7,6 +7,7 @@ import StoreProvider from './store/StoreProvider';
 
 import HomeView from '../js/views/Home';
 import ChatView from '../js/views/Chat';
+import ChatCreate from './views/ChatCreate';
 import WelcomeView from './views/Welcome';
 import SettingsView from '../js/views/Settings';
 
@@ -59,6 +60,7 @@ function ChatApp() {
           <Route path='/' exact element={<WelcomeView />} />
           <Route path='/home' element={<AuthRoute> <HomeView /> </AuthRoute>} />
           <Route path='/chat/:id' element={<AuthRoute><ChatView /></AuthRoute>} />
+          <Route path='/chatCreate' element={<AuthRoute><ChatCreate /></AuthRoute>} />
           <Route path='/settings' element={<AuthRoute><SettingsView /></AuthRoute>} />
         </Routes>
       </ContentWrapper>
