@@ -25,13 +25,13 @@ function Home() {
   return (
     <div className="row no-gutters fh">
       <div className="col-3 fh">
-        <JoinedChatsList chats={chats} />
+        <JoinedChatsList chats={[]} />
       </div>
       <div className="col-9 fh">
         <ViewTitle text="Choose your channel" >
           <Link className="btn btn-outline-primary" to="/chatCreate" >New</Link>
         </ViewTitle>
-        <AvailableChatsList chats={chats} />
+        <AvailableChatsList chats={[]} />
       </div>
     </div>
   )
