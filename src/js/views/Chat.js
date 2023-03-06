@@ -14,7 +14,6 @@ function Chat () {
   const { id } = useParams();
   const dispatch = useDispatch();
   const activeChats = useSelector(({chats}) => {
-    debugger
     return chats.activeChats[id]})
   
   useEffect(() => {
@@ -27,10 +26,10 @@ function Chat () {
   return (
     <div className="row no-gutters fh">
       <div className="col-3 fh">
-        <ChatUserList />
+        <ChatUserList users={activeChats?.joinedUsers} />
       </div>
       <div className="col-9 fh">
-        <ViewTitle text={`Joined channel: ${id}`} />
+        <ViewTitle text={`Channel: ${activeChats?.name}`} />
         <ChatMessagesList />
       </div>
     </div>
