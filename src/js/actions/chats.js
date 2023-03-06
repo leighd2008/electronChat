@@ -44,6 +44,8 @@ export const subscribeToChat = chatId => dispatch =>
       const userSnapshot = await userRef.get();
       return userSnapshot.data()
     }))
+    
+    chat.joinedUsers = joinedUsers;
     dispatch({type: 'CHATS_SET_ACTIVE_CHAT', chat})
   })
 

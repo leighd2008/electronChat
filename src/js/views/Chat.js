@@ -1,7 +1,7 @@
 
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ChatUserList from "../components/ChatUsersList";
 import ViewTitle from "../components/shared/ViewTitle";
@@ -13,6 +13,9 @@ import { subscribeToChat } from "../actions/chats";
 function Chat () {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const activeChats = useSelector(({chats}) => {
+    debugger
+    return chats.activeChats[id]})
   
   useEffect(() => {
     const unsubFromChat = dispatch(subscribeToChat(id));
