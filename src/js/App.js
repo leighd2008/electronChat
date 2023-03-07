@@ -34,26 +34,35 @@ function ChatApp() {
   const dispatch = useDispatch();
   const isChecking = useSelector(({auth}) => auth.isChecking);
   const isOnline = useSelector(({app}) => app.isOnline);
+  const user = useSelector(({auth}) => auth.user);
   
   useEffect(() => {
     const unsubFromAuth = dispatch(listenToAuthChanges());
     const unsubFromConnection = dispatch(listenToConnectionChanges())
-    const unsubFromUserConnection = dispatch(checkUserConnection());
     
     return () => {
       unsubFromAuth();
       unsubFromConnection();
-      unsubFromUserConnection();
     }
-    
   }, [dispatch])
   
-  if (isChecking) {
-    return <LoadingView />
-  }
+  useEffect(() => {
+    let unsubFromUserConnection;
+    if (user?.uid) {
+      unsubFromUserConnection = dispatch(checkUserConnection(user.uid));
+    }
+    
+    return () => {
+      unsubFromUserConnection && unsubFromUserConnection();
+    }
+  }, [dispatch, user])
   
   if (!isOnline) {
     return <LoadingView message='Application has been disconnected from the internet. Please reconnect ...' />
+  }
+  
+  if (isChecking) {
+    return <LoadingView />
   }
   
   return (
