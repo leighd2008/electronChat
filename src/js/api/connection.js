@@ -21,3 +21,4 @@ export const onConnectionChanged = onConnection =>
       const isConnected = snapshot?.val() ? snapshot.val() : false;
       onConnection(isConnected)
     })
+    
