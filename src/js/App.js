@@ -15,6 +15,7 @@ import LoadingView from './components/shared/loadingView';
 
 import { listenToAuthChanges } from './actions/auth';
 import { listenToConnectionChanges } from './actions/app';
+import { checkUserConnection } from './actions/connection';
 
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -37,10 +38,12 @@ function ChatApp() {
   useEffect(() => {
     const unsubFromAuth = dispatch(listenToAuthChanges());
     const unsubFromConnection = dispatch(listenToConnectionChanges())
+    const unsubFromUserConnection = dispatch(checkUserConnection());
     
     return () => {
       unsubFromAuth();
       unsubFromConnection();
+      unsubFromUserConnection();
     }
     
   }, [dispatch])
