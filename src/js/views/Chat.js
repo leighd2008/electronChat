@@ -10,7 +10,9 @@ import LoadingView from "../components/shared/loadingView"
 import { withBaseLayout } from "../layouts/Base";
 import Messenger from "../components/Messenger";
 
-import { subscribeToChat, subscribeToProfile } from "../actions/chats";
+import { subscribeToChat,
+  subscribeToProfile,
+  sendChatMessage} from "../actions/chats";
 
 function Chat () {
   const { id } = useParams();
@@ -39,9 +41,9 @@ function Chat () {
     })
   }, [dispatch, id])
   
-  const sendMessage = message => {
-    alert(JSON.stringify(message));
-  }
+  const sendMessage = useCallback(message => {
+    dispatch(sendChatMessage(message, id))
+  }, [id])
   
   const unsubFromJoinedUsers = useCallback(() => {
     Object.keys(peopleWatchers.current)
