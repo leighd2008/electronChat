@@ -35,15 +35,22 @@ export const subscribeToChat = (chatId, onSubscribe) =>
     })
 
 export const subscribeToProfile = (uid, onSubscribe) =>
-db
-  .collection('profiles')
-  .doc(uid)
-  .onSnapshot(snapshot => onSubscribe(snapshot.data()))
+  db
+    .collection('profiles')
+    .doc(uid)
+    .onSnapshot(snapshot => onSubscribe(snapshot.data()))
   
 export const sendChatMessage = (message, chatId) =>
-db
+  db
+      .collection('chats')
+      .doc(chatId)
+      .collection('messages')
+      .doc(message.timestamp)
+      .set(message)
+    
+export const subscribeToMessages = (chatId, onSubscribe) => 
+  db
     .collection('chats')
     .doc(chatId)
     .collection('messages')
-    .doc(message.timestamp)
-    .set(message)
+    .onSnapshot(snapshot => onSubscribe(snapshot.docChanges()))
