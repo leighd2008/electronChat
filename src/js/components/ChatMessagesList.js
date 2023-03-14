@@ -2,6 +2,7 @@
 import React from "react";
 
 export default function ChatMessagesList(messages = []) {
+  console.log(messages)
   return (
     <div className="chat-container">
       <ul className="chat-box chatContainerScroll">

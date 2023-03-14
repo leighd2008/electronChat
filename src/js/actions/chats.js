@@ -65,7 +65,7 @@ export const sendChatMessage = (message, chatId) => (dispatch, getState) => {
 }
 
 export const subscribeToMessages = chatId => dispatch => {
-  return api.subscribeToMessages(chatId, changes => {
+  return api.subscribeToMessages(chatId, async changes => {
     
     const messages = changes.map(change => {
       if (change.type === 'added') {
@@ -73,7 +73,15 @@ export const subscribeToMessages = chatId => dispatch => {
       }
     })
     
-    return dispatch({type: 'CHATS_SET_MESSAGES', messages, chatId})
+    const messagesWithAuthor = [];
+    
+    for await(let message of messages) {
+      const userSnapshot = await message.author.get();
+      message.author = userSnapshot.data();
+      messagesWithAuthor.push(message);
+    }
+    console.log(messages)
+    return dispatch({type: 'CHATS_SET_MESSAGES', messages: messagesWithAuthor, chatId})
   })
 }
 
