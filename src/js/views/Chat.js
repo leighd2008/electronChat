@@ -20,7 +20,7 @@ function Chat () {
   const peopleWatchers = useRef({});
   const dispatch = useDispatch();
   const activeChat = useSelector(({chats}) => chats.activeChats[id])
-  const messages = useSelector(({chats}) => chats.messages[id])
+  const messages = useSelector(({chats}) => chats.messages[id] || [])
   const joinedUsers = activeChat?.joinedUsers
   
   useEffect(() => {
