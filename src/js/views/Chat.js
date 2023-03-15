@@ -57,7 +57,6 @@ function Chat () {
     return <LoadingView message="Loading Chat..." />
   }
   
-  console.log(messages)
   
   return (
     <div className="row no-gutters fh">

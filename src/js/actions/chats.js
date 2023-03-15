@@ -74,13 +74,19 @@ export const subscribeToMessages = chatId => dispatch => {
     })
     
     const messagesWithAuthor = [];
+    const cache = {}
     
     for await(let message of messages) {
-      const userSnapshot = await message.author.get();
-      message.author = userSnapshot.data();
+      if (cache[message.author.id]) {
+        message.author = cache[message.author.id]
+      } else {
+        const userSnapshot = await message.author.get();
+        cache[userSnapshot.id] = userSnapshot.data();
+        message.author = cache[userSnapshot.id];
+        
+      }
       messagesWithAuthor.push(message);
     }
-    console.log(messages)
     return dispatch({type: 'CHATS_SET_MESSAGES', messages: messagesWithAuthor, chatId})
   })
 }
