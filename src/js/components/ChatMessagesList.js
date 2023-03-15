@@ -2,11 +2,12 @@
 import React from "react";
 
 export default function ChatMessagesList(messages = []) {
+  console.log(messages)
   return (
     <div className="chat-container">
       <ul className="chat-box chatContainerScroll">
-        { messages.messages.map(message =>
-          <li key={message.id}
+        { messages.messages.map((message, i) =>
+          <li key={i}
             className="chat-left">
             <div className="chat-avatar">
               <img

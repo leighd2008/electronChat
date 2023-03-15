@@ -13,7 +13,8 @@ import Messenger from "../components/Messenger";
 import { subscribeToChat,
   subscribeToProfile,
   sendChatMessage,
-  subscribeToMessages} from "../actions/chats";
+  subscribeToMessages,
+  registerMessageSubscription } from "../actions/chats";
 
 function Chat () {
   const { id } = useParams();
@@ -21,11 +22,17 @@ function Chat () {
   const dispatch = useDispatch();
   const activeChat = useSelector(({chats}) => chats.activeChats[id])
   const messages = useSelector(({chats}) => chats.messages[id] || [])
+  const messagesSub = useSelector(({chats}) => chats.messagesSubs[id])
   const joinedUsers = activeChat?.joinedUsers
   
   useEffect(() => {
     const unsubFromChat = dispatch(subscribeToChat(id));
-    dispatch(subscribeToMessages(id));
+    
+    //  register unsubscription
+    if (!messagesSub) {
+      const unsubFromMessages = dispatch(subscribeToMessages(id));
+      dispatch(registerMessageSubscription(id, unsubFromMessages));
+    }
     return () => {
       unsubFromChat();
       unsubFromJoinedUsers();
