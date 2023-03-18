@@ -9,10 +9,10 @@ export default function ChatMessagesList(messages = [], {innerRef}) {
   const isAuthOf = useCallback(message => {
     return message?.author.uid === user.uid ? 'chat-right' : 'chat-left'
   })
-  
+
   return (
     <div className="chat-container">
-      <ul ref={innerRef} className="chat-box chatContainerScroll">
+      <ul ref={messages.innerRef} className="chat-box chatContainerScroll">
         { messages.messages.map((message, i) =>
           <li key={i}
             className={isAuthOf(message)}>
