@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { formatTimeAgo } from '../utils/time';
 
-export default function ChatMessagesList(messages = [], innerRef) {
+export default function ChatMessagesList(messages = [], {innerRef}) {
   const user = useSelector(({auth}) => auth.user);
   
   const isAuthOf = useCallback(message => {
