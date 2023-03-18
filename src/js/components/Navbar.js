@@ -2,7 +2,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../api/auth";
+import { logout } from "../actions/auth";
 import BackButton from "./shared/BackButton";
 
 export default function Navbar({canGoBack, view}) {
