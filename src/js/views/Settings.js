@@ -9,7 +9,6 @@ function Settings () {
     isDarkTheme,
     showNotifications,
     playSound } = useSelector(({settings}) => settings)
-    debugger
   
   const handleChange = ({target: {checked, name}}) => {
     dispatch(updateSettings(name, checked))
