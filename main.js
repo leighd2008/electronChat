@@ -13,6 +13,7 @@ function createWindow() {
     width: 1200,
     height: 800,
     backgroundColor: "#6e707e",
+    show: false,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -23,13 +24,16 @@ function createWindow() {
   
   win.loadFile('index.html')
   isDev && win.webContents.openDevTools();
+  return win;
 }
 
-function createSecondWindow() {
+function createSplashWindow() {
   const win = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 400,
+    height: 200,
     backgroundColor: "#6e707e",
+    frame: false,
+    transparent: true,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -37,7 +41,8 @@ function createSecondWindow() {
     }
   })
   
-  win.loadFile('second.html')
+  win.loadFile('splash.html')
+  return win;
 }
 
 if (isDev) {
@@ -60,8 +65,17 @@ app.whenReady()
     tray = new Tray(trayIcon);
     tray.setContextMenu(menu);
     
-    createWindow();
-    createSecondWindow();
+    const splash = createSplashWindow();
+    const mainApp = createWindow();
+    
+    mainApp.once('ready-to-show', () => {
+      // splash.destroy();
+      // mainApp.show();
+      setTimeout(() => {
+        splash.destroy();
+        mainApp.show();
+      }, 3000)
+    })
   });
   
 ipcMain.on('notify', (e, message) => {
