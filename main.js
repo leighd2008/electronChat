@@ -31,7 +31,6 @@ function createSplashWindow() {
   const win = new BrowserWindow({
     width: 400,
     height: 200,
-    backgroundColor: "#6e707e",
     frame: false,
     transparent: true,
     webPreferences: {
@@ -74,7 +73,7 @@ app.whenReady()
       setTimeout(() => {
         splash.destroy();
         mainApp.show();
-      }, 3000)
+      }, 1000)
     })
   });
   
