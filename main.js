@@ -21,6 +21,21 @@ function createWindow() {
   isDev && win.webContents.openDevTools();
 }
 
+function createSecondWindow() {
+  const win = new BrowserWindow({
+    width: 1200,
+    height: 800,
+    backgroundColor: "#6e707e",
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
+      worldSafeExecuteJavaScript: true,
+    }
+  })
+  
+  win.loadFile('second.html')
+}
+
 if (isDev) {
   require('electron-reload')(__dirname, {
     electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
@@ -33,6 +48,7 @@ app.whenReady()
     const menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
     createWindow();
+    createSecondWindow();
   });
   
 ipcMain.on('notify', (e, message) => {
